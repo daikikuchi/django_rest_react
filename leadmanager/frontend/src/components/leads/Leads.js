@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLeads } from '../../actions/leads';
@@ -7,13 +7,42 @@ import { getLeads } from '../../actions/leads';
 export class Leads extends Component {
   static propTypes = {
     leads: PropTypes.array.isRequired
+  };
+
+  componentDidMount() {
+    this.props.getLeads();
   }
 
   render() {
     return (
-      <div>
-        <h1>Leads list</h1>
-      </div>
+      <>
+         <h2>Leads</h2>
+         <table className="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            { this.props.leads.map(lead => (
+              <tr key={lead.id}>
+                <td>{lead.id}</td>
+                <td>{lead.name}</td>
+                <td>{lead.email}</td>
+                <td>{lead.message}</td>
+                <td>
+                 <button className="btn btn-danger btn">
+                 Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+         </table>
+      </>
     );
   }
 }
@@ -23,4 +52,4 @@ const mapStateToProps = state => ({
 });
 
 // whenever we use connect we need to export default connect
-export default connect(mapStateToProps)(Leads);
+export default connect(mapStateToProps, { getLeads })(Leads);
