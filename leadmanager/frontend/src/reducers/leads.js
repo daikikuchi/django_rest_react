@@ -1,4 +1,4 @@
-import { GET_LEADS, DELETE_LEAD } from "../actions/types.js";
+import { GET_LEADS, DELETE_LEAD, ADD_LEAD } from "../actions/types.js";
 
 // A reducer is basicallu function that takes in an action and evaluate it
 // and send down certain state depending on what that action does
@@ -20,6 +20,11 @@ export default function(state = initialState, action) {
        leads: state.leads.filter(lead => lead.id !==
        action.payload)
      }
+    case ADD_LEAD:
+      return{
+        ...state,
+        leads: [...state.leads, action.payload]
+      }
     default:
       return state;
   }
