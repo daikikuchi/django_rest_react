@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getLeads } from '../../actions/leads';
+import { getLeads, deleteLead } from '../../actions/leads';
 // Call getLeads when component mounts and the leads come down from the reducer into the componet as a state
 
 export class Leads extends Component {
@@ -35,7 +35,9 @@ export class Leads extends Component {
                 <td>{lead.email}</td>
                 <td>{lead.message}</td>
                 <td>
-                 <button className="btn btn-danger btn">
+                 <button onClick=
+                 {this.props.deleteLead.bind(this, lead.id)}
+                 className="btn btn-danger btn">
                  Delete</button>
                 </td>
               </tr>
@@ -52,4 +54,4 @@ const mapStateToProps = state => ({
 });
 
 // whenever we use connect we need to export default connect
-export default connect(mapStateToProps, { getLeads })(Leads);
+export default connect(mapStateToProps, { getLeads, deleteLead })(Leads);
