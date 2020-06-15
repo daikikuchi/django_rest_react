@@ -21,6 +21,7 @@ export default function(state = initialState, action) {
        action.payload)
      }
     case ADD_LEAD:
+      console.log(state)
       return{
         ...state,
         leads: [...state.leads, action.payload]
