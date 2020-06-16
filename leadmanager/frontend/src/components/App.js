@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import ReactDOM from 'react-dom'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // import { Provider as AlertProvider } from 'react-alert';
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
@@ -24,13 +25,17 @@ class App extends Component {
      return (
        <Provider store={store}>
          <AlertProvider template={AlertTemplate} {...alertOptions}>
+          <Router>
             <Fragment>
                <Header />
                <Alerts />
                  <div className="container">
-                     <Dashboard />
+                    <Switch>
+                      <Route exact path="/" component={Dashboard} />
+                    </Switch>
                  </div>
-           </Fragment>
+            </Fragment>
+           </Router>
           </AlertProvider>
        </Provider>
      )
