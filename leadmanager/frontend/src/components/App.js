@@ -19,12 +19,6 @@ const alertOptions = {
   transitions: transitions.SCALE
 };
 
-// const alertOptions = {
-//   timeout: 3000,
-//   position: positions.TOP_CENTER,
-// };
-
-
 class App extends Component {
   render() {
      return (

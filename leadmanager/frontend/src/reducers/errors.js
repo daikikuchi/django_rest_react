@@ -6,6 +6,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
+  console.log(state,'state')
   switch(action.type) {
       case GET_ERRORS:
        return {
