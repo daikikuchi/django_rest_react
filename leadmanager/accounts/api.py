@@ -10,9 +10,9 @@ class RegisterAPI(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        # Calling .save() will either create a new instance, or update an existing instance,
+        # depending on  if an existing instance was passed when instantiating the serializer class:
         user = serializer.save()
-        # print(UserSerializer(user, context=self.get_serializer_context()).data)
-        # {'id': 7, 'username': 'hanahana', 'email': 'hanahana8@gmail.com'}
         return Response({
         # .data give us the serialized user
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
@@ -29,9 +29,10 @@ class LoginAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         # pass1,pass4,pass5,pass2,pass3
         serializer.is_valid(raise_exception=True)
-        print(serializer, 'serializer')
-        print(print(serializer.validated_data, 'serializer.validated_data'))
+        # Return the authorized
         user = serializer.validated_data
+        print(user.username)
+        print(user.email)
         return Response({
         # .data give us the serialized user
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
