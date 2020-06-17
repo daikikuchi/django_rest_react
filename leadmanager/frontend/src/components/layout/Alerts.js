@@ -12,9 +12,7 @@ export class Alerts extends Component {
   // when we get a new prop, here errors, this functions run
   // This takes in previous prop, make sure that the props have changed
   componentDidUpdate(prevProps) {
-    console.log(prevProps)
     const { error, alert, message } = this.props;
-    console.log(message, 'message')
     if (error !== prevProps.error ) {
       if(error.msg.name) alert.error(
         `Name: ${error.msg.name.join()}`);

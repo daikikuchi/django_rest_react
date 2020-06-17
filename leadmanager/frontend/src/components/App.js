@@ -11,10 +11,12 @@ import Dashboard from './leads/Dashboard';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
+import PrivateRoute from "./common/PrivateRoute"
 
 import { Provider } from 'react-redux';
 import store from '../store';
 
+import { loadUser } from '../actions/auth';
 // Alert Options
 const alertOptions = {
   timeout: 3000,
@@ -23,6 +25,11 @@ const alertOptions = {
 };
 
 class App extends Component {
+  componentDidMount() {
+    // we call dispatch directly from the store
+    store.dispatch(loadUser());
+  }
+
   render() {
      return (
        <Provider store={store}>
@@ -33,7 +40,7 @@ class App extends Component {
                <Alerts />
                  <div className="container">
                     <Switch>
-                      <Route exact path="/" component={Dashboard} />
+                      <PrivateRoute exact path="/" component={Dashboard} />
                       <Route exact path="/register" component={Register} />
                       <Route exact path="/login" component={Login} />
                     </Switch>
